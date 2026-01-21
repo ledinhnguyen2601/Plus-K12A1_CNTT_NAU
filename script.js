@@ -20,38 +20,44 @@ const newsData = [
   {
     id: 1,
     type: "featured",
-    title: "K12A1 Giành giải Nhất Hội thi Sáng tạo NAU 2025",
-    thumb: "images/bg-nhom.jpg",
-    desc: "Nhóm 1 với sản phẩm AI Assistant đã xuất sắc vượt qua 20 đội thi...",
-    url: "https://vnexpress.net", // Link giả lập, thực tế load iframe hoặc text
+    title: "Trường Đại Học NGhệ AN",
+    thumb:
+      "https://naue.edu.vn/Images/userfiles/Slider/Slider-131-12-25-21-02-29.png",
+    desc: "Trường Đại Học Nghệ An Chúc Mừng NĂm Mới 2026",
+    url: "https://vhttps://naue.edu.vn/nexpress.net", // Link giả lập, thực tế load iframe hoặc text
   },
   {
     id: 2,
     type: "normal",
-    title: "Thông báo lịch thi kết thúc học phần",
-    thumb: "https://via.placeholder.com/300x200?text=Exam",
-    url: "",
+    title: "Quy chế tuyển sinh ",
+    thumb:
+      "https://naue.edu.vn/Images/userfiles/Thumbs/2026-1/thong-14-1-26-08-53.png",
+    url: "https://naue.edu.vn/quy-che-tuyen-sinh-445/thong--8845.aspx",
   },
   {
     id: 3,
     type: "normal",
-    title: "Hoạt động tình nguyện Mùa hè xanh",
-    thumb: "https://via.placeholder.com/300x200?text=Volunteer",
-    url: "",
+    title:
+      "Trường Đại học Kinh tế Nghệ An đạt chuẩn 3 sao plus theo định hướng ứng dụng của hệ thống xếp hạng đối sánh chất lượng đại học (UPM)",
+    thumb:
+      "https://naue.edu.vn/Images/userfiles/85/Contents/b%c3%aca%202(2).jpg",
+    url: "https://naue.edu.vn/tieu-diem-su-kien-562/truong-dai-hoc-kinh-te-nghe-an-dat-chuan-3-sao-plus-theo-dinh-huong-ung-dung-cua-he-thong-xep-hang-doi-sanh-chat-luong-dai-hoc--6673.aspx",
   },
   {
     id: 4,
     type: "normal",
-    title: "Hội thảo: Xu hướng AI năm 2026",
-    thumb: "https://via.placeholder.com/300x200?text=AI+Seminar",
-    url: "",
+    title: "Thông báo : Tuyển sinh năm 2026",
+    thumb:
+      "https://naue.edu.vn/Images/userfiles/Slider/Slider-25-1-26-10-40-56.png",
+    url: "https://xettuyen.nau.edu.vn/",
   },
   {
     id: 5,
     type: "normal",
-    title: "Tuyển thành viên CLB Code",
-    thumb: "https://via.placeholder.com/300x200?text=Join+Us",
-    url: "",
+    title: "Tạp chí khoa học",
+    thumb:
+      "https://naue.edu.vn/Images/userfiles/Thumbs/2025-6/thong-bao-moi-viet-bai-30-6-25-16-25.png",
+    url: "https://naue.edu.vn/tap-chi-khoa-hoc-566/Default.aspx",
   },
 ];
 
