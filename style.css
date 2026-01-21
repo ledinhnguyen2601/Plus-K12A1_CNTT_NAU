@@ -281,21 +281,71 @@ body::before {
 }
 
 /* Mobile News Grid */
+/* --- RESPONSIVE MOBILE (SỬA LỖI THANH ĐIỀU HƯỚNG) --- */
 @media (max-width: 768px) {
-  .news-grid {
+  /* 1. Căn chỉnh lại lưới Profile (Giữ nguyên code cũ của bạn) */
+  .profile-grid {
     grid-template-columns: 1fr;
-    grid-template-rows: auto;
   }
-  .news-item.featured {
-    grid-column: auto;
-    grid-row: auto;
-    height: 300px;
+  .profile-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 25px;
   }
-  .news-item {
-    height: 200px;
+  .big-avatar {
+    width: 140px;
+    height: 140px;
   }
-  .hero-content h1 {
-    font-size: 2.5rem;
+  .chat-window {
+    width: 90%;
+    right: 5%;
+    bottom: 20px;
+  }
+
+  /* --- 2. CODE MỚI: FIX THANH NAV TRÊN ĐIỆN THOẠI --- */
+  .navbar {
+    padding: 0 10px; /* Giảm lề 2 bên cho rộng chỗ */
+    gap: 5px; /* Giảm khoảng cách giữa các khối */
+    height: 60px; /* Thu gọn chiều cao */
+  }
+
+  /* Thu gọn Logo */
+  .logo {
+    font-size: 0.9rem; /* Chữ nhỏ lại */
+    white-space: nowrap; /* Không cho xuống dòng */
+    margin-right: 5px;
+  }
+  .logo i {
+    display: none;
+  } /* Ẩn icon code cho gọn */
+
+  /* Danh sách Avatar: Cho phép cuộn ngang */
+  .nav-members {
+    flex: 1; /* Chiếm toàn bộ khoảng trống ở giữa */
+    overflow-x: auto; /* Cho phép lướt ngang nếu nhiều người */
+    justify-content: flex-start; /* Căn trái thay vì căn giữa */
+    gap: 8px; /* Avatar xích lại gần nhau */
+    padding-bottom: 0;
+
+    /* Ẩn thanh cuộn xấu xí đi */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .nav-members::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-avatar {
+    width: 35px; /* Avatar nhỏ lại */
+    height: 35px;
+    flex-shrink: 0; /* Cấm không cho ảnh bị bóp méo */
+    border-width: 1px;
+  }
+
+  /* Nút công cụ bên phải */
+  .nav-controls button {
+    margin-left: 5px;
+    font-size: 1rem;
   }
 }
 
