@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio K12A1 NAU - NHÓM 1</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo" id="logo-btn">
+        <span>K12A1</span>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label">Thành viên</div>
+        <div class="nav-members" id="nav-members"></div>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label">Công cụ</div>
+        <div class="nav-controls">
+          <button id="theme-toggle">
+            <i class="fas fa-moon"></i>
+            <span class="btn-text">Giao diện</span>
+          </button>
+          <button id="chat-toggle-btn">
+            <i class="fas fa-robot"></i>
+            <span class="btn-text">Chat AI</span>
+          </button>
+          <button id="admin-login-btn">
+            <i class="fas fa-key"></i>
+            <span class="btn-text">Cập nhật</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <section id="hero-section" class="active">
+        <div class="hero-content">
+          <h1>WE ARE K12A1</h1>
+          <p class="subtitle">Sáng tạo - Công nghệ - Tiên phong</p>
+          <p class="desc">Chạm vào avatar trên thanh menu để khám phá hồ sơ</p>
+        </div>
+
+        <div class="news-wrapper">
+          <h2 class="section-title">CÁC PHẦN TIN TỨC KHÁC</h2>
+          <div class="news-grid" id="news-grid"></div>
+        </div>
+      </section>
+
+      <section id="profile-page" class="hidden">
+        <button class="close-page-btn" id="back-home-btn" title="Đóng">
+          <i class="fas fa-times"></i>
+        </button>
+
+        <div class="profile-container">
+          <div class="profile-header">
+            <div class="p-avatar-area">
+              <img id="p-avatar" src="" alt="Avatar" />
+              <label
+                for="avatar-upload"
+                id="edit-avatar-btn"
+                class="hidden-edit"
+              >
+                <i class="fas fa-camera"></i>
+                <input type="file" id="avatar-upload" hidden />
+              </label>
+            </div>
+            <div class="p-basic-info">
+              <h1 id="p-name" class="editable" data-field="name">
+                Tên Thành Viên
+              </h1>
+              <span id="p-role" class="role-badge editable" data-field="role"
+                >Vai trò</span
+              >
+              <p>
+                <i class="fas fa-birthday-cake"></i>
+                <span id="p-dob" class="editable" data-field="dob"
+                  >DD/MM/YYYY</span
+                >
+              </p>
+              <p>
+                <i class="fas fa-map-marker-alt"></i>
+                <span id="p-from" class="editable" data-field="from"
+                  >Quê quán</span
+                >
+              </p>
+            </div>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="profile-body">
+            <div class="profile-section">
+              <h3>
+                <i class="fas fa-user-graduate"></i> Quá trình học tập & Rèn
+                luyện
+              </h3>
+              <div
+                id="p-exp"
+                class="content-box editable"
+                data-field="exp"
+              ></div>
+            </div>
+
+            <div class="profile-section">
+              <h3><i class="fas fa-rocket"></i> Dự án tương lai</h3>
+              <div
+                id="p-project"
+                class="content-box editable"
+                data-field="project"
+              ></div>
+            </div>
+
+            <div class="profile-section">
+              <h3><i class="fas fa-bullseye"></i> Mục tiêu & Định hướng</h3>
+              <div
+                id="p-goal"
+                class="content-box editable"
+                data-field="goal"
+              ></div>
+            </div>
+
+            <div class="profile-section double-col">
+              <div class="box">
+                <h4><i class="fas fa-thumbs-up"></i> Ưu điểm</h4>
+                <div id="p-pros" class="editable" data-field="pros">...</div>
+              </div>
+              <div class="box">
+                <h4><i class="fas fa-thumbs-down"></i> Nhược điểm</h4>
+                <div id="p-cons" class="editable" data-field="cons">...</div>
+              </div>
+            </div>
+
+            <div class="profile-section double-col">
+              <div class="box">
+                <h4><i class="fas fa-heart"></i> Sở thích</h4>
+                <span id="p-hobby" class="editable" data-field="hobby"
+                  >...</span
+                >
+              </div>
+              <div class="box">
+                <h4><i class="fas fa-ban"></i> Ghét</h4>
+                <span id="p-hate" class="editable" data-field="hate">...</span>
+              </div>
+            </div>
+          </div>
+
+          <button id="save-profile-btn" class="save-btn hidden">
+            <i class="fas fa-save"></i> Lưu Thay Đổi
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <div id="news-modal" class="modal hidden">
+      <div class="modal-content news-modal-content">
+        <span class="close-modal" id="close-news">&times;</span>
+        <div id="news-reader-body">
+          <h2 id="news-title-modal">Tiêu đề bài viết</h2>
+          <div id="news-iframe-container"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Về Chúng Tôi</h3>
+          <p>Nhóm 1 - Lớp K12A1 - Khoa CNTT - Đại học NAU.</p>
+          <p>Tiên phong trong công nghệ, sáng tạo trong tư duy.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Liên Hệ</h3>
+          <p><i class="fas fa-envelope"></i> contact@k12a1-group1.com</p>
+          <p><i class="fas fa-phone"></i> 0987.654.321</p>
+        </div>
+        <div class="footer-section">
+          <h3>Kết Nối</h3>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-google"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>@2026 Nhóm 1 CNTT NAU. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <div class="chat-window hidden" id="chat-window">
+      <div class="chat-header">
+        <span>K12A1 Assistant</span>
+        <span id="close-chat" style="cursor: pointer">&times;</span>
+      </div>
+      <div class="chat-content" id="chat-content">
+        <div
+          class="bot-message"
+          style="background: #eee; padding: 8px; border-radius: 5px"
+        >
+          Xin chào! Tôi có thể giúp gì cho bạn?
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="user-input" placeholder="Hỏi về thành viên..." />
+        <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

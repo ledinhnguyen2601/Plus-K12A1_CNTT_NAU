@@ -1,0 +1,552 @@
+:root {
+  /* MÀU SẮC CHỦ ĐẠO */
+  --primary: #667eea;
+  --secondary: #764ba2;
+  --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  --text-main: #1e293b;
+  --text-light: #64748b;
+  --bg-overlay: rgba(255, 255, 255, 0.85);
+  --glass: rgba(255, 255, 255, 0.7);
+  --border: 1px solid rgba(0, 0, 0, 0.1);
+  --nav-width: 100px;
+}
+
+/* CHẾ ĐỘ TỐI (DARK MODE) */
+[data-theme="dark"] {
+  --text-main: #f1f5f9;
+  --text-light: #94a3b8;
+  --bg-overlay: rgba(15, 23, 42, 0.9);
+  --glass: rgba(30, 41, 59, 0.8);
+  --border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--text-main);
+  /* Background Image Gốc */
+  background: url("images/bg-nhom.jpg") no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  /* Navigation PC: Chừa chỗ bên trái */
+  padding-left: var(--nav-width);
+  transition: all 0.3s ease;
+}
+
+/* 4. Lớp phủ thay đổi theo theme */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-overlay); /* Thay đổi màu dựa vào biến CSS */
+  z-index: -1;
+  backdrop-filter: blur(5px);
+  transition: background-color 0.5s ease;
+}
+
+/* --- 2. NAVIGATION (VERTICAL ON DESKTOP) --- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--nav-width);
+  height: 100vh;
+  background: var(--glass);
+  backdrop-filter: blur(15px);
+  border-right: var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  z-index: 1000;
+  overflow-y: auto;
+  gap: 30px;
+}
+
+.logo span {
+  font-weight: 800;
+  font-size: 1.2rem;
+  /* Tại dòng .logo span hoặc .hero-content h1 */
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text; /* <--- THÊM DÒNG NÀY ĐỂ HẾT BÁO VÀNG */
+  -webkit-text-fill-color: transparent;
+  color: transparent; /* Thêm dòng này để hỗ trợ các trình duyệt khác */
+}
+
+.nav-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.nav-members {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.nav-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid transparent;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.nav-avatar:hover {
+  border-color: var(--primary);
+  transform: scale(1.1);
+}
+
+/* 3. Icon có chữ bên dưới */
+.nav-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nav-controls button {
+  background: none;
+  border: none;
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  gap: 5px;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+.nav-controls button:hover {
+  opacity: 1;
+  color: var(--primary);
+}
+.nav-controls button i {
+  font-size: 1.2rem;
+}
+.btn-text {
+  font-size: 0.7rem;
+}
+
+/* --- RESPONSIVE MOBILE NAV (TOP) --- */
+@media (max-width: 768px) {
+  body {
+    padding-left: 0;
+    padding-top: 80px;
+  }
+  .navbar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-right: none;
+    border-bottom: var(--border);
+  }
+  .nav-group,
+  .nav-label {
+    display: none;
+  } /* Ẩn group label trên mobile cho gọn */
+  .nav-members {
+    flex-direction: row;
+  }
+  .nav-controls {
+    flex-direction: row;
+    gap: 15px;
+  }
+  .nav-controls button span {
+    display: none;
+  } /* Ẩn chữ trên mobile */
+  .nav-avatar {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* --- HERO & NEWS --- */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+#hero-section {
+  text-align: center;
+}
+.hero-content {
+  margin-bottom: 80px;
+  animation: fadeIn 1s;
+}
+.hero-content h1 {
+  font-size: 4rem;
+  margin-bottom: 10px;
+  background: var(--gradient);
+  /* Thêm đủ 2 dòng này để hỗ trợ mọi trình duyệt và hết lỗi vàng */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* 6. NEWS GRID LAYOUT */
+.news-wrapper {
+  margin-top: 50px;
+  text-align: left;
+}
+.section-title {
+  border-left: 5px solid var(--primary);
+  padding-left: 15px;
+  margin-bottom: 30px;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 250px 250px;
+  gap: 20px;
+}
+
+.news-item {
+  background: var(--glass);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+.news-item:hover {
+  transform: translateY(-5px);
+}
+.news-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.5s;
+}
+.news-item:hover .news-thumb {
+  transform: scale(1.05);
+}
+.news-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: white;
+}
+.news-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  text-shadow: 0 1px 3px black;
+}
+
+/* Ô To nhất (Tiêu điểm) */
+.news-item.featured {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+.news-item.featured h3 {
+  font-size: 1.8rem;
+}
+
+/* Mobile News Grid */
+@media (max-width: 768px) {
+  .news-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .news-item.featured {
+    grid-column: auto;
+    grid-row: auto;
+    height: 300px;
+  }
+  .news-item {
+    height: 200px;
+  }
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* --- 1. FULL PAGE PROFILE --- */
+#profile-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-overlay);
+  z-index: 2000;
+  overflow-y: auto;
+  padding: 0;
+  backdrop-filter: blur(20px);
+}
+.close-page-btn {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: var(--text-main);
+  cursor: pointer;
+  z-index: 2001;
+}
+
+.profile-container {
+  max-width: 1000px;
+  margin: 60px auto;
+  background: var(--glass);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+.p-avatar-area {
+  position: relative;
+}
+#p-avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+#edit-avatar-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: var(--primary);
+  color: white;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.divider {
+  margin: 30px 0;
+  border: none;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.profile-body h3 {
+  color: var(--secondary);
+  margin-bottom: 15px;
+  border-bottom: 2px solid rgba(118, 75, 162, 0.2);
+  display: inline-block;
+}
+.profile-section {
+  margin-bottom: 40px;
+}
+.content-box {
+  line-height: 1.6;
+}
+
+.double-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+.box {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* EDITABLE STYLES */
+.editable[contenteditable="true"] {
+  border: 2px dashed var(--primary);
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.8);
+  outline: none;
+}
+.save-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  padding: 15px 30px;
+  background: var(--gradient);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+  z-index: 2002;
+  animation: bounce 1s infinite alternate;
+}
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+/* 7. FOOTER */
+.site-footer {
+  background: #0f172a;
+  color: white;
+  padding: 50px 20px 20px;
+  margin-top: 50px;
+}
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+.footer-section h3 {
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+.social-links a {
+  color: white;
+  font-size: 1.5rem;
+  margin-right: 20px;
+  transition: 0.3s;
+}
+.social-links a:hover {
+  color: var(--primary);
+}
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+  opacity: 0.6;
+  font-size: 0.9rem;
+}
+
+/* UTILS */
+.hidden {
+  display: none !important;
+}
+.hidden-edit {
+  display: none !important;
+}
+
+/* 5. MODAL TIN TỨC */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 3000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.news-modal-content {
+  background: white;
+  width: 90%;
+  max-width: 900px;
+  height: 80vh;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: black;
+  z-index: 10;
+}
+#news-reader-body {
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+  color: #333;
+}
+#news-iframe-container iframe {
+  width: 100%;
+  height: 60vh;
+  border: none;
+}
+
+/* Chat CSS giữ nguyên */
+.chat-window {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 320px;
+  height: 450px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  z-index: 2500;
+  overflow: hidden;
+}
+.chat-header {
+  background: var(--gradient);
+  color: white;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+}
+.chat-content {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background: #f8f9fa;
+  color: #333;
+}
+.chat-input-area {
+  padding: 10px;
+  display: flex;
+  gap: 5px;
+  border-top: 1px solid #ddd;
+}
