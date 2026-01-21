@@ -425,3 +425,94 @@ document.getElementById("chat-toggle-btn").onclick = () =>
   document.getElementById("chat-window").classList.remove("hidden");
 document.getElementById("close-chat").onclick = () =>
   document.getElementById("chat-window").classList.add("hidden");
+
+// ======================================================
+// 7. PHẦN CODE CHATBOT (BỊ THIẾU - DÁN VÀO CUỐI FILE)
+// ======================================================
+const userInput = document.getElementById("user-input");
+const chatContent = document.getElementById("chat-content");
+const sendBtn = document.getElementById("send-btn");
+
+// Gắn sự kiện Click cho nút Gửi
+if (sendBtn) {
+  sendBtn.onclick = handleChat;
+}
+
+// Gắn sự kiện nhấn Enter
+if (userInput) {
+  userInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") handleChat();
+  });
+}
+
+async function handleChat() {
+  const text = userInput.value.trim();
+  if (!text) return;
+
+  // 1. Hiện tin nhắn của bạn lên màn hình
+  addMsg(
+    text,
+    "user-message",
+    "text-align: right; background: #dbeafe; padding: 8px; border-radius: 5px; margin: 5px 0; margin-left: auto; width: fit-content; max-width: 80%;",
+  );
+  userInput.value = ""; // Xóa ô nhập
+
+  // 2. Hiện trạng thái "Đang nhập..."
+  const loadingMsg = addMsg(
+    "AI đang suy nghĩ...",
+    "bot-message",
+    "background: #f1f5f9; padding: 8px; border-radius: 5px; margin: 5px 0; width: fit-content; font-style: italic; color: #666;",
+  );
+
+  // 3. Gọi về Server Netlify để hỏi Gemini
+  try {
+    const reply = await callGemini(text);
+
+    // Cập nhật câu trả lời vào ô đang load
+    loadingMsg.innerText = reply;
+    loadingMsg.style.fontStyle = "normal";
+    loadingMsg.style.color = "#000";
+  } catch (error) {
+    loadingMsg.innerText = "Lỗi: " + error.message;
+    loadingMsg.style.color = "red";
+  }
+}
+
+// Hàm vẽ bong bóng chat
+function addMsg(text, className, style) {
+  const div = document.createElement("div");
+  div.className = className;
+  div.style = style; // Style inline để đảm bảo hiện đúng màu
+  div.innerText = text;
+  chatContent.appendChild(div);
+  chatContent.scrollTop = chatContent.scrollHeight; // Tự cuộn xuống đáy
+  return div;
+}
+
+// Hàm kết nối Server
+async function callGemini(message) {
+  try {
+    const response = await fetch("/.netlify/functions/gemini", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: message }),
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        "Server Netlify chưa phản hồi (Code " + response.status + ")",
+      );
+    }
+
+    const data = await response.json();
+
+    // Lấy câu trả lời từ cấu trúc JSON của Google
+    return (
+      data.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "AI không có câu trả lời."
+    );
+  } catch (e) {
+    console.error(e);
+    return "Lỗi kết nối: Hãy kiểm tra lại API Key trên Netlify.";
+  }
+}

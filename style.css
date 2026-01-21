@@ -245,10 +245,12 @@ body::before {
 .news-item:hover {
   transform: translateY(-5px);
 }
+/* Tìm class .news-thumb và sửa thành như sau */
 .news-thumb {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Giữ nguyên để ảnh phủ kín đẹp */
+  object-position: center center; /* <--- THÊM DÒNG NÀY: Để nó luôn lấy chính giữa ảnh */
   transition: 0.5s;
 }
 .news-item:hover .news-thumb {
