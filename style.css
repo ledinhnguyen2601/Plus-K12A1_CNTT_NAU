@@ -282,8 +282,62 @@ body::before {
 
 /* Mobile News Grid */
 /* --- RESPONSIVE MOBILE (SỬA LỖI THANH ĐIỀU HƯỚNG) --- */
+/* ================================================= */
+/* MOBILE RESPONSIVE (SỬA LỖI THANH ĐIỀU HƯỚNG) */
+/* ================================================= */
 @media (max-width: 768px) {
-  /* 1. Căn chỉnh lại lưới Profile (Giữ nguyên code cũ của bạn) */
+  /* 1. Tinh chỉnh khung Navbar */
+  .navbar {
+    padding: 0 10px; /* Giảm lề 2 bên */
+    height: 60px; /* Thu gọn chiều cao */
+    gap: 8px; /* Khoảng cách giữa các phần tử */
+  }
+
+  /* 2. Logo nhỏ lại & Ẩn icon thừa */
+  .logo {
+    font-size: 1rem; /* Chữ nhỏ lại */
+    white-space: nowrap; /* Cấm xuống dòng */
+    margin-right: 0;
+  }
+  .logo i {
+    display: none; /* Ẩn cái icon <code> cho gọn */
+  }
+
+  /* 3. DANH SÁCH THÀNH VIÊN: CUỘN NGANG */
+  .nav-members {
+    flex: 1; /* Chiếm toàn bộ khoảng trống ở giữa */
+    display: flex;
+    justify-content: flex-start; /* Căn lề trái */
+    overflow-x: auto; /* KÍCH HOẠT CUỘN NGANG */
+    overflow-y: hidden;
+    gap: 8px; /* Các avatar sát lại gần nhau hơn */
+    padding: 5px 0;
+
+    /* Ẩn thanh cuộn xấu xí đi */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iPhone */
+  }
+  .nav-members::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 4. Avatar (Quan trọng: Không cho bị bóp méo) */
+  .nav-avatar {
+    width: 38px;
+    height: 38px;
+    min-width: 38px; /* BẮT BUỘC: Để không bị bóp nhỏ thành số 0 */
+    flex-shrink: 0; /* BẮT BUỘC: Giữ nguyên kích thước khi hết chỗ */
+    border-width: 1.5px;
+  }
+
+  /* 5. Nút công cụ bên phải (Chat, Theme) */
+  .nav-controls button {
+    margin-left: 5px;
+    font-size: 1.1rem;
+  }
+
+  /* --- CÁC PHẦN KHÁC TRÊN MOBILE (GIỮ NGUYÊN) --- */
   .profile-grid {
     grid-template-columns: 1fr;
   }
@@ -300,52 +354,6 @@ body::before {
     width: 90%;
     right: 5%;
     bottom: 20px;
-  }
-
-  /* --- 2. CODE MỚI: FIX THANH NAV TRÊN ĐIỆN THOẠI --- */
-  .navbar {
-    padding: 0 10px; /* Giảm lề 2 bên cho rộng chỗ */
-    gap: 5px; /* Giảm khoảng cách giữa các khối */
-    height: 60px; /* Thu gọn chiều cao */
-  }
-
-  /* Thu gọn Logo */
-  .logo {
-    font-size: 0.9rem; /* Chữ nhỏ lại */
-    white-space: nowrap; /* Không cho xuống dòng */
-    margin-right: 5px;
-  }
-  .logo i {
-    display: none;
-  } /* Ẩn icon code cho gọn */
-
-  /* Danh sách Avatar: Cho phép cuộn ngang */
-  .nav-members {
-    flex: 1; /* Chiếm toàn bộ khoảng trống ở giữa */
-    overflow-x: auto; /* Cho phép lướt ngang nếu nhiều người */
-    justify-content: flex-start; /* Căn trái thay vì căn giữa */
-    gap: 8px; /* Avatar xích lại gần nhau */
-    padding-bottom: 0;
-
-    /* Ẩn thanh cuộn xấu xí đi */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .nav-members::-webkit-scrollbar {
-    display: none;
-  }
-
-  .nav-avatar {
-    width: 35px; /* Avatar nhỏ lại */
-    height: 35px;
-    flex-shrink: 0; /* Cấm không cho ảnh bị bóp méo */
-    border-width: 1px;
-  }
-
-  /* Nút công cụ bên phải */
-  .nav-controls button {
-    margin-left: 5px;
-    font-size: 1rem;
   }
 }
 
