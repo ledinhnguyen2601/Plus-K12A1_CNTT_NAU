@@ -285,75 +285,97 @@ body::before {
 /* ================================================= */
 /* MOBILE RESPONSIVE (SỬA LỖI THANH ĐIỀU HƯỚNG) */
 /* ================================================= */
+/* ================================================= */
+/* FIX LỖI MOBILE NAV (PHIÊN BẢN FINAL) */
+/* ================================================= */
 @media (max-width: 768px) {
   /* 1. Tinh chỉnh khung Navbar */
   .navbar {
-    padding: 0 10px; /* Giảm lề 2 bên */
-    height: 60px; /* Thu gọn chiều cao */
-    gap: 8px; /* Khoảng cách giữa các phần tử */
+    height: 65px !important;
+    padding: 0 10px !important;
+    gap: 5px;
+    z-index: 9999 !important; /* Đảm bảo luôn nổi trên cùng */
+    position: fixed; /* Cố định luôn cho chắc */
+    top: 0;
+    left: 0;
+    width: 100%;
   }
 
-  /* 2. Logo nhỏ lại & Ẩn icon thừa */
+  /* 2. Thu gọn Logo (Chỉ hiện chữ K12A1, ẩn chữ GROUP nếu cần) */
   .logo {
-    font-size: 1rem; /* Chữ nhỏ lại */
-    white-space: nowrap; /* Cấm xuống dòng */
+    font-size: 0.9rem !important;
+    white-space: nowrap;
     margin-right: 0;
-  }
-  .logo i {
-    display: none; /* Ẩn cái icon <code> cho gọn */
+    flex-shrink: 1; /* Cho phép logo co lại nếu cần */
   }
 
-  /* 3. DANH SÁCH THÀNH VIÊN: CUỘN NGANG */
+  /* 3. KHUNG AVATAR (MAGIC FIX) */
   .nav-members {
-    flex: 1; /* Chiếm toàn bộ khoảng trống ở giữa */
+    flex: 1; /* Chiếm hết chỗ trống */
     display: flex;
-    justify-content: flex-start; /* Căn lề trái */
-    overflow-x: auto; /* KÍCH HOẠT CUỘN NGANG */
-    overflow-y: hidden;
-    gap: 8px; /* Các avatar sát lại gần nhau hơn */
-    padding: 5px 0;
+    align-items: center;
 
-    /* Ẩn thanh cuộn xấu xí đi */
+    /* --- CÁC DÒNG QUAN TRỌNG ĐỂ CUỘN ĐƯỢC --- */
+    overflow-x: auto !important; /* Bắt buộc cuộn ngang */
+    overflow-y: hidden;
+    min-width: 0; /* QUAN TRỌNG: Phá vỡ kẹt Flexbox */
+    width: 100%; /* Đảm bảo có chiều rộng để cuộn */
+    /* ------------------------------------------- */
+
+    gap: 10px;
+    padding: 0 5px;
+
+    /* Cuộn mượt và ẩn thanh cuộn */
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    -ms-overflow-style: none;
-    -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iPhone */
   }
   .nav-members::-webkit-scrollbar {
     display: none;
   }
 
-  /* 4. Avatar (Quan trọng: Không cho bị bóp méo) */
+  /* 4. Avatar (Cứng cáp, không bị bóp méo) */
   .nav-avatar {
-    width: 38px;
-    height: 38px;
-    min-width: 38px; /* BẮT BUỘC: Để không bị bóp nhỏ thành số 0 */
-    flex-shrink: 0; /* BẮT BUỘC: Giữ nguyên kích thước khi hết chỗ */
-    border-width: 1.5px;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important; /* Không bao giờ bị bóp nhỏ hơn 40px */
+    flex-shrink: 0 !important; /* Cấm co lại */
+    border: 2px solid white;
+    margin: 0 !important;
   }
 
-  /* 5. Nút công cụ bên phải (Chat, Theme) */
+  /* 5. Nút công cụ */
+  .nav-controls {
+    display: flex;
+    flex-shrink: 0;
+  }
   .nav-controls button {
-    margin-left: 5px;
+    margin-left: 2px;
     font-size: 1.1rem;
+    padding: 5px;
   }
 
-  /* --- CÁC PHẦN KHÁC TRÊN MOBILE (GIỮ NGUYÊN) --- */
+  /* Đẩy nội dung xuống để không bị Navbar che mất */
+  #hero-section {
+    margin-top: 85px !important;
+  }
+
+  /* Fix lại layout Profile */
   .profile-grid {
     grid-template-columns: 1fr;
   }
   .profile-left {
     border-right: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    padding-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
   }
   .big-avatar {
-    width: 140px;
-    height: 140px;
+    width: 130px;
+    height: 130px;
   }
   .chat-window {
-    width: 90%;
-    right: 5%;
-    bottom: 20px;
+    width: 92%;
+    right: 4%;
+    bottom: 15px;
   }
 }
 
