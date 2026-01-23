@@ -24,7 +24,7 @@ const newsData = [
     thumb:
       "https://naue.edu.vn/Images/userfiles/Slider/Slider-131-12-25-21-02-29.png",
     desc: "Trường Đại Học Nghệ An Chúc Mừng NĂm Mới 2026",
-    url: "https://vhttps://naue.edu.vn/nexpress.net", // Link giả lập, thực tế load iframe hoặc text
+    url: "https://naue.edu.vn/",
   },
   {
     id: 2,
